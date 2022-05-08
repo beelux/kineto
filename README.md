@@ -1,6 +1,6 @@
 # \#dailybuild notice
 
-This is the kineto (gemini proxy) repo for the dailybuild server.
+This is the [kineto](https://sr.ht/~sircmpwn/kineto/) (gemini proxy) repo for the dailybuild server.
 
 The static binary is built in a GitHub runner and sent over to the dailybuild server automatically after a push in the master branch.
 
