@@ -1,0 +1,47 @@
+name: Deploy kineto to the server
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Get main branch
+        uses: actions/checkout@master
+
+      - name: Setup Go environment
+        uses: actions/setup-go@v2
+
+      - name: Create SSH config folder
+        run: mkdir -pv ~/.ssh
+
+      - name: Add Known Hosts
+        run: |
+          echo "${{ secrets.SSH_DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
+
+      - name: Add SSH key
+        run: |
+          touch ~/.ssh/key
+          chmod 600 ~/.ssh/key
+          echo "${{ secrets.SSH_DEPLOY_RUNNER_KEY }}" > ~/.ssh/key
+
+      - name: Chnage directory into repository
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Build kineto
+        run: go build
+
+      - name: Stop Gemini service
+        run: ssh -i ~/.ssh/key "${{ secrets.SSH_DEPLOY_DESTINATION }}"
+          'sudo systemctl stop kineto'
+
+      - name: Copy server binary
+        run: scp -q -i ~/.ssh/key $GITHUB_WORKSPACE/kineto "${{ secrets.SSH_DEPLOY_DESTINATION }}":/opt/gemini/kineto
+
+      - name: Start Gemini service
+        run: ssh -i ~/.ssh/key "${{ secrets.SSH_DEPLOY_DESTINATION }}"
+          'sudo systemctl start kineto'
