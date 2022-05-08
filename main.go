@@ -327,7 +327,7 @@ dl dt:not(:first-child) {
 	margin-top: 0.5rem;
 }
 
-@media(prefers-color-scheme:dark) {
+/* @media(prefers-color-scheme:dark) { */
 	html {
 		background-color: #111;
 		color: #eee;
@@ -348,7 +348,7 @@ dl dt:not(:first-child) {
 	a:visited {
 		color: #333399;
 	}
-}
+/* } */
 
 label {
 	display: block;
