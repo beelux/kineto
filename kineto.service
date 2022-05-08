@@ -1,0 +1,12 @@
+[Unit]
+Description=HTTP to Gemini proxy
+After=network.target
+
+[Service]
+User=gemini
+Group=gemini
+Type=simple
+ExecStart=/opt/gemini/kineto -b 127.0.0.1:1966 gemini://dailybuild.org
+
+[Install]
+WantedBy=multi-user.target
