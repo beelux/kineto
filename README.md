@@ -1,3 +1,15 @@
+# \#dailybuild notice
+
+This is the kineto (gemini proxy) repo for the dailybuild server.
+
+The static binary is built in a GitHub runner and sent over to the dailybuild server automatically after a push in the master branch.
+
+dailybuild members are free to contribute.
+Note that the upstream changes will be merged into this repository.
+
+This is NOT the upstream project, just our way of automating deployments
+to our servers in a way that makes it public and somewhat documented.
+
 # kineto
 
 This is an [HTTP][http] to [Gemini][gemini] proxy designed to provide service
