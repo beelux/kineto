@@ -116,7 +116,7 @@ var gemtextPage = template.Must(template.
 			}
 			// FIXME: support custom proxied path, not just domains
 			// NOTE: This adds /gemini/ infront of the path, so that the proxy works
-			u.Path = fmt.Sprintf("/gemini/%s%s", u.Host, u.Path)
+			u.Path = fmt.Sprintf("/gemini%s%s", u.Host, u.Path)
 			return template.URL(u.String())
 		},
 		"safeCSS": func(s string) template.CSS {
